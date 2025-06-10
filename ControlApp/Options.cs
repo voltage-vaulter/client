@@ -22,7 +22,9 @@ namespace ControlApp
 
         private void SvExit_Click(object sender, EventArgs e)
         {
-            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             KeyValueConfigurationCollection apps = myconfig.AppSettings.Settings;
 
             //sub options
@@ -62,8 +64,10 @@ namespace ControlApp
 
             string poptypestr = "";
 
-            if (nseethr.Checked == true) poptypestr = "n";
-            else if (seethr.Checked == true) poptypestr = "s";
+            if (nseethr.Checked == true)
+                poptypestr = "n";
+            else if (seethr.Checked == true)
+                poptypestr = "s";
 
             if (clickthr.Checked == true)
                 poptypestr += "t";
@@ -152,7 +156,7 @@ namespace ControlApp
             if (ConfigurationManager.AppSettings["DarkMode"] != null)
             {
                 string dmode = ConfigurationManager.AppSettings["DarkMode"].ToString();
-                
+
                 if (Convert.ToBoolean(dmode))
                 {
                     dmode_chk.Checked = true;
@@ -170,7 +174,6 @@ namespace ControlApp
                             control.BackColor = Color.DarkGray;
                             control.ForeColor = Color.White;
                         }
-
                     }
                     foreach (TabPage tabPage in tabControl1.TabPages)
                     {
@@ -192,7 +195,6 @@ namespace ControlApp
                     }
                 }
             }
-
 
             if (ConfigurationManager.AppSettings["PopStyle"] != null)
                 popstyle = ConfigurationManager.AppSettings["PopStyle"].ToString();
@@ -233,19 +235,15 @@ namespace ControlApp
 
             if (poptypearr[1] == 't')
                 clickthr.Checked = true;
-            else
-                if (poptypearr[1] == 'c')
+            else if (poptypearr[1] == 'c')
                 clkbl.Checked = true;
-            else
-                if (poptypearr[1] == 'n')
+            else if (poptypearr[1] == 'n')
                 normlbtn.Checked = true;
-
 
             if (poptypearr[2] == 'n')
                 nmove.Checked = true;
             else if (poptypearr[2] == 'm')
                 ymove.Checked = true;
-
 
             if (poptypearr[3] == 'f')
                 fullscchk.Checked = true;
@@ -271,7 +269,9 @@ namespace ControlApp
             }
             if (ConfigurationManager.AppSettings["OutstandRemind"] != null)
             {
-                string OutstandRemind = ConfigurationManager.AppSettings["OutstandRemind"].ToString();
+                string OutstandRemind = ConfigurationManager
+                    .AppSettings["OutstandRemind"]
+                    .ToString();
                 outstandch.Checked = Convert.ToBoolean(OutstandRemind);
             }
             if (ConfigurationManager.AppSettings["SendDelete"] != null)
@@ -359,18 +359,11 @@ namespace ControlApp
                 string dism = ConfigurationManager.AppSettings["DisM"].ToString();
                 dismch.Checked = Convert.ToBoolean(dism);
             }
-
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
+        private void tabPage1_Click(object sender, EventArgs e) { }
 
-        }
-
-        private void webcamch_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void webcamch_CheckedChanged(object sender, EventArgs e) { }
 
         private void fullscchk_CheckedChanged(object sender, EventArgs e)
         {

@@ -1,5 +1,4 @@
-﻿using AxWMPLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -10,10 +9,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AxWMPLib;
 
 namespace ControlApp
-{  
-    
+{
     public partial class Subliminal : Form
     {
         private System.Windows.Forms.Timer tmr;
@@ -27,19 +26,18 @@ namespace ControlApp
 
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt32 dwNewLong);
-        
 
-        public Subliminal(string what,Boolean message)
+        public Subliminal(string what, Boolean message)
         {
             InitializeComponent();
 
             StartPosition = FormStartPosition.CenterScreen;
             Screen[] my = Screen.AllScreens;
             Size = my[0].Bounds.Size;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;  // no borders
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None; // no borders
 
-            TopMost = true;        // make the form always on top                     
-            Visible = true;        // Important! if this isn't set, then the form is not shown at all
+            TopMost = true; // make the form always on top
+            Visible = true; // Important! if this isn't set, then the form is not shown at all
 
             // Set the form click-through
             UInt32 initialStyle = GetWindowLong(this.Handle, -20);
@@ -51,7 +49,10 @@ namespace ControlApp
                 this.Close();
             };
             Random rand = new Random();
-            if ((ConfigurationManager.AppSettings["PopSet"] != null) && ("Long" == ConfigurationManager.AppSettings["PopSet"].ToString()))
+            if (
+                (ConfigurationManager.AppSettings["PopSet"] != null)
+                && ("Long" == ConfigurationManager.AppSettings["PopSet"].ToString())
+            )
             {
                 int mins = rand.Next(11);
                 tmr.Interval = (int)TimeSpan.FromMinutes(mins).TotalMilliseconds;
@@ -78,9 +79,6 @@ namespace ControlApp
             }
         }
 
-        private void Subliminal_Load(object sender, EventArgs e)
-        {
-                       
-        }
+        private void Subliminal_Load(object sender, EventArgs e) { }
     }
 }

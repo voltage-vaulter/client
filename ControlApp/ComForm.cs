@@ -15,30 +15,33 @@ namespace ControlApp
     {
         public string[] ReturnedData { get; private set; }
         private string formtype;
-        public ComForm(string Url,string type)
+
+        public ComForm(string Url, string type)
         {
             formtype = type;
-            ReturnedData = new string[]{ "","",""};
+            ReturnedData = new string[] { "", "", "" };
             WebBrowser wb = new WebBrowser();
             {
                 wb.Name = "TheWebBrowser";
                 wb.Navigate(Url);
                 wb.Dock = DockStyle.Fill;
-                wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(TheWebBrowser_DocumentCompleted);
+                wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(
+                    TheWebBrowser_DocumentCompleted
+                );
             }
             Controls.Add(wb);
             InitializeComponent();
         }
 
-        private void ComForm_Load(object sender, EventArgs e)
-        {
+        private void ComForm_Load(object sender, EventArgs e) { }
 
-        }
-        private void TheWebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void TheWebBrowser_DocumentCompleted(
+            object sender,
+            WebBrowserDocumentCompletedEventArgs e
+        )
         {
             if (this.Controls["TheWebBrowser"] != null)
             {
-                
                 WebBrowser myControl = (WebBrowser)this.Controls["TheWebBrowser"];
                 string htmlContent = myControl.DocumentText;
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();

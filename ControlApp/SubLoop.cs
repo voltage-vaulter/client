@@ -30,9 +30,9 @@ namespace ControlApp
         Utils Utils;
         string appDirectory;
         int position;
+
         public SubLoop()
         {
-
             position = 0;
             InitializeComponent();
             label1.Text = "";
@@ -75,7 +75,10 @@ namespace ControlApp
             }
             if (itemstoloop.Count > 0)
             {
-                if ((axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)|| (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsUndefined))
+                if (
+                    (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
+                    || (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsUndefined)
+                )
                 {
                     string[] item = itemstoloop[position];
                     bool mess = true;
@@ -93,7 +96,6 @@ namespace ControlApp
 
         public void additem(string item)
         {
-
             if (!Utils.IsWebPage(item))
             {
                 //download item if needed
@@ -106,8 +108,8 @@ namespace ControlApp
                 if (item != "FAILED")
                     itemstoloop.Add(new string[2] { "m", item });
             }
-
         }
+
         public void doitem(string item, bool message)
         {
             if (message)
@@ -128,6 +130,7 @@ namespace ControlApp
                 axWindowsMediaPlayer1.settings.volume = 10;
             }
         }
+
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             File.Delete(appDirectory);
@@ -141,9 +144,6 @@ namespace ControlApp
             tmr.Stop();
         }
 
-        private void SubLoop_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void SubLoop_Load(object sender, EventArgs e) { }
     }
 }

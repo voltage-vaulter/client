@@ -22,7 +22,7 @@ namespace ControlApp
 
         private void Audiopop_Load(object sender, EventArgs e)
         {
-            if (whatlocal.Substring(whatlocal.Length - 3,3) == "wav")
+            if (whatlocal.Substring(whatlocal.Length - 3, 3) == "wav")
             {
                 SoundPlayer simpleSound = new SoundPlayer(whatlocal);
                 simpleSound.Play();

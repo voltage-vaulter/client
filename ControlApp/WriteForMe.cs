@@ -17,6 +17,7 @@ namespace ControlApp
         int mistakes;
         int count;
         string senderstr;
+
         public WriteForMe(string message, string times, string senderid)
         {
             InitializeComponent();
@@ -36,14 +37,16 @@ namespace ControlApp
             timer1.Tick += new EventHandler(MyTimer_Tick);
             timer1.Start();
         }
+
         private void MyTimer_Tick(object sender, EventArgs e)
         {
             seconds++;
         }
+
         private void input_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
-            {                
+            {
                 if (wfmtextb.Text == writelbl.Text)
                 {
                     count--;
@@ -61,7 +64,19 @@ namespace ControlApp
                 {
                     Utils ut = new Utils();
                     string usrnm = ConfigurationManager.AppSettings["UserName"].ToString();
-                    ut.sendcmd(senderstr, ut.Ecrypt("M=" + usrnm + " completed your command in " + timelbl.Text + " seconds with " + mistakelbl.Text + " mistakes.&&&Please Reward"), false);
+                    ut.sendcmd(
+                        senderstr,
+                        ut.Ecrypt(
+                            "M="
+                                + usrnm
+                                + " completed your command in "
+                                + timelbl.Text
+                                + " seconds with "
+                                + mistakelbl.Text
+                                + " mistakes.&&&Please Reward"
+                        ),
+                        false
+                    );
                     this.Close();
                 }
             }
@@ -71,7 +86,19 @@ namespace ControlApp
         {
             Utils ut = new Utils();
             string usrnm = ConfigurationManager.AppSettings["UserName"].ToString();
-            ut.sendcmd(senderstr, ut.Ecrypt("M="+ usrnm + " failed your command after " + timelbl.Text + " seconds with " + mistakelbl.Text + " mistakes.&&&Please Punish"), false);
+            ut.sendcmd(
+                senderstr,
+                ut.Ecrypt(
+                    "M="
+                        + usrnm
+                        + " failed your command after "
+                        + timelbl.Text
+                        + " seconds with "
+                        + mistakelbl.Text
+                        + " mistakes.&&&Please Punish"
+                ),
+                false
+            );
             this.Close();
         }
     }

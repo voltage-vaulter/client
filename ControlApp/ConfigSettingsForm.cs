@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace ControlApp
 {
@@ -19,9 +19,12 @@ namespace ControlApp
         {
             InitializeComponent();
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             KeyValueConfigurationCollection apps = myconfig.AppSettings.Settings;
             apps.Remove("LocalDrive");
             apps.Remove("AutoRun");
@@ -56,6 +59,7 @@ namespace ControlApp
             ConfigurationManager.RefreshSection(myconfig.AppSettings.SectionInformation.Name);
             this.Close();
         }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -71,7 +75,7 @@ namespace ControlApp
             else
                 checkBox2.Checked = false;
             string delstr = ConfigurationManager.AppSettings["Delay"];
-            if (delstr=="30")
+            if (delstr == "30")
             {
                 delaycmb.SelectedIndex = 0;
             }
@@ -123,16 +127,27 @@ namespace ControlApp
             {
                 user = textBox2.Text;
             }
-            System.Diagnostics.Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://www.thecontrolapp.co.uk/Pages/Sub/SubSettings.aspx?user=" + user + "&password=" + Password,
-                UseShellExecute = true
-            });
+            System.Diagnostics.Process.Start(
+                new ProcessStartInfo
+                {
+                    FileName =
+                        "https://www.thecontrolapp.co.uk/Pages/Sub/SubSettings.aspx?user="
+                        + user
+                        + "&password="
+                        + Password,
+                    UseShellExecute = true,
+                }
+            );
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            using (
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(
+                    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+                    true
+                )
+            )
             {
                 key.SetValue("ControlApp", "\"" + Application.ExecutablePath + "\"");
             }
@@ -140,7 +155,12 @@ namespace ControlApp
 
         private void button4_Click(object sender, EventArgs e)
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            using (
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(
+                    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+                    true
+                )
+            )
             {
                 key.DeleteValue("My Program", false);
             }

@@ -12,9 +12,15 @@ namespace ControlApp
         private const int WH_KEYBOARD_LL = 13;
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
+
         // Define the SetWindowsHookEx method
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+        private static extern IntPtr SetWindowsHookEx(
+            int idHook,
+            LowLevelKeyboardProc lpfn,
+            IntPtr hMod,
+            uint dwThreadId
+        );
 
         // Define the UnhookWindowsHookEx method
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -23,7 +29,12 @@ namespace ControlApp
 
         // Define the CallNextHookEx method
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr CallNextHookEx(
+            IntPtr hhk,
+            int nCode,
+            IntPtr wParam,
+            IntPtr lParam
+        );
 
         // Define the GetModuleHandle method
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -36,7 +47,12 @@ namespace ControlApp
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                return SetWindowsHookEx(
+                    WH_KEYBOARD_LL,
+                    proc,
+                    GetModuleHandle(curModule.ModuleName),
+                    0
+                );
             }
         }
 
@@ -49,11 +65,12 @@ namespace ControlApp
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
-        
+
         public void Lock()
         {
             _hookID = SetHook(_proc);
         }
+
         public void Unlock()
         {
             UnhookWindowsHookEx(_hookID);

@@ -20,7 +20,9 @@ namespace ControlApp
 
         private void svncls_Click(object sender, EventArgs e)
         {
-            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration myconfig = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             KeyValueConfigurationCollection apps = myconfig.AppSettings.Settings;
             apps.Remove("CommonUsers");
             string userlist = "";
@@ -86,7 +88,8 @@ namespace ControlApp
             string userlist = ConfigurationManager.AppSettings["CommonUsers"];
             string blist = ConfigurationManager.AppSettings["BlackList"];
             string Ublist = ConfigurationManager.AppSettings["UserBList"];
-            Utils utils = new Utils(); ;
+            Utils utils = new Utils();
+            ;
             if (userlist != null)
             {
                 string[] users = utils.seperate_string(userlist);
@@ -98,7 +101,7 @@ namespace ControlApp
                 textBox2.Lines = blists;
             }
             if (Ublist != null)
-            {                
+            {
                 string[] blists = utils.seperate_string(Ublist);
                 textBox3.Lines = blists;
             }

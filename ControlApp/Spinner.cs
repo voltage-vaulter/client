@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace ControlApp
 {
     public partial class Spinner : Form
@@ -23,12 +22,13 @@ namespace ControlApp
         string[] seperateitems;
         Random random;
         int item_poition = 0;
+
         public Spinner(string spinlist)
         {
             random = new Random();
             duration = random.Next(50, 401);
             utils = new Utils();
-            seperateitems = utils.seperate_string(spinlist);            
+            seperateitems = utils.seperate_string(spinlist);
             InitializeComponent();
             timer = new System.Windows.Forms.Timer { Interval = 25 }; // Timer for rotation
             timer.Tick += Timer_Tick;
@@ -37,13 +37,17 @@ namespace ControlApp
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            resultbox_txt.Text= seperateitems[item_poition];
-            if (duration == 0) timer.Stop(); // Stop when slow enough            
+            resultbox_txt.Text = seperateitems[item_poition];
+            if (duration == 0)
+                timer.Stop(); // Stop when slow enough
             pictureBox1.Image = RotateImage(bmp_img, angle);
             pictureBox1.Refresh();
             duration--;
             item_poition++;
-            if(item_poition == seperateitems.Length) {item_poition = 0;}
+            if (item_poition == seperateitems.Length)
+            {
+                item_poition = 0;
+            }
         }
 
         private void SpinBtn_Click(object sender, EventArgs e)
@@ -65,16 +69,19 @@ namespace ControlApp
                 g.TranslateTransform(-centerX, -centerY);
                 g.DrawImage(bmp, new Point(0, 0));
                 g.ResetTransform();
-
             }
             return rotated;
         }
 
         private void Spinner_Load(object sender, EventArgs e)
         {
-            bitmpath = AppDomain.CurrentDomain.BaseDirectory + "spinwheels\\spinner_"+ seperateitems.Count().ToString() + "_slices.png";
+            bitmpath =
+                AppDomain.CurrentDomain.BaseDirectory
+                + "spinwheels\\spinner_"
+                + seperateitems.Count().ToString()
+                + "_slices.png";
             bmp_img = new Bitmap(bitmpath);
-            pictureBox1.Refresh(); 
+            pictureBox1.Refresh();
             if (ConfigurationManager.AppSettings["DarkMode"] != null)
             {
                 string dmode = ConfigurationManager.AppSettings["DarkMode"].ToString();

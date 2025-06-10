@@ -15,12 +15,24 @@ namespace ControlApp
     {
         string thefile;
         string senderstr;
+
         public SendOrDelete(string senderid)
         {
             InitializeComponent();
             string location = ConfigurationManager.AppSettings["LocalDrive"];
-            string[] filetypes = { ".jpg", ".jpeg", ".gif", ".mov", ".mpg", ".mpeg", ".avi", ".png", ".mp4" };
-            List<string> acceptablefiles= new List<string>();
+            string[] filetypes =
+            {
+                ".jpg",
+                ".jpeg",
+                ".gif",
+                ".mov",
+                ".mpg",
+                ".mpeg",
+                ".avi",
+                ".png",
+                ".mp4",
+            };
+            List<string> acceptablefiles = new List<string>();
             if (location != null)
             {
                 string[] allfiles = Directory.GetFiles(location);
@@ -52,7 +64,7 @@ namespace ControlApp
 
             string usrnm = ConfigurationManager.AppSettings["UserName"].ToString();
             string line1 = "M=" + usrnm + " chose to delete.";
-            utils.sendcmd(senderstr, utils.Ecrypt(line1) , false);
+            utils.sendcmd(senderstr, utils.Ecrypt(line1), false);
             this.Close();
         }
 
@@ -67,7 +79,7 @@ namespace ControlApp
 
         private void Sendbtn_Click(object sender, EventArgs e)
         {
-            Utils utils= new Utils();
+            Utils utils = new Utils();
             bool wrked = utils.sendftpfile(thefile);
             if (wrked)
             {

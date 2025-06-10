@@ -23,12 +23,12 @@ namespace ControlApp
         }
     }
 
-
     public class MyCustomApplicationContext : ApplicationContext
     {
         private NotifyIcon trayIcon;
         private ControlApp myforminvis;
         private ControlApp myform;
+
         public MyCustomApplicationContext()
         {
             // Initialize Tray Icon
@@ -45,7 +45,7 @@ namespace ControlApp
             myforminvis.Opacity = 0;
             myforminvis.ShowInTaskbar = false;
             myforminvis.Show();
-            myform=new ControlApp();
+            myform = new ControlApp();
         }
 
         private void TrayIcon_MouseClick(object? sender, MouseEventArgs e)
@@ -54,7 +54,7 @@ namespace ControlApp
             {
                 if (myform.IsDisposed)
                     myform = new ControlApp();
-                    myform.Show();                
+                myform.Show();
             }
         }
 
@@ -65,6 +65,7 @@ namespace ControlApp
 
             Application.Exit();
         }
+
         void Open(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
@@ -72,6 +73,7 @@ namespace ControlApp
                 myform = new ControlApp();
             myform.Show();
         }
+
         void Subliminal(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
@@ -96,6 +98,7 @@ namespace ControlApp
                 subLoop.Show();
             }
         }
+
         void Panic(object sender, EventArgs e)
         {
             foreach (Form fm in Application.OpenForms)
