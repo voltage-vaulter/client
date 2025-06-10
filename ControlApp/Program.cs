@@ -1,7 +1,4 @@
-using System.Configuration;
-using System.Resources;
-using System.Security.Policy;
-using System.Windows.Forms;
+using ControlApp.Subroutines;
 
 namespace ControlApp
 {
@@ -23,12 +20,12 @@ namespace ControlApp
         }
     }
 
+
     public class MyCustomApplicationContext : ApplicationContext
     {
         private NotifyIcon trayIcon;
-        private ControlApp myforminvis;
-        private ControlApp myform;
-
+        private MainWindow myforminvis;
+        private MainWindow myform;
         public MyCustomApplicationContext()
         {
             // Initialize Tray Icon
@@ -41,20 +38,21 @@ namespace ControlApp
             trayIcon.ContextMenuStrip.Items.Add("Subliminal", null, Subliminal);
             trayIcon.MouseClick += TrayIcon_MouseClick;
             trayIcon.Visible = true;
-            myforminvis = new ControlApp();
+            myforminvis = new MainWindow();
             myforminvis.Opacity = 0;
             myforminvis.ShowInTaskbar = false;
             myforminvis.Show();
-            myform = new ControlApp();
+            myform=new MainWindow();
         }
 
         private void TrayIcon_MouseClick(object? sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (myform.IsDisposed)
-                    myform = new ControlApp();
-                myform.Show();
+                if (myform.IsDisposed) {
+                    myform = new MainWindow();
+                    myform.Show();       
+                }
             }
         }
 
@@ -65,40 +63,26 @@ namespace ControlApp
 
             Application.Exit();
         }
-
         void Open(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             if (myform.IsDisposed)
-                myform = new ControlApp();
+                myform = new MainWindow();
             myform.Show();
         }
-
         void Subliminal(object sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
-            bool done = false;
-            foreach (Form fm in System.Windows.Forms.Application.OpenForms)
+            SubLoop? loop = (SubLoop?) Utils.GetForm(typeof(SubLoop));
+            if (loop != null) 
             {
-                if (fm.GetType() == typeof(SubLoop))
-                {
-                    SubLoop pop = (SubLoop)fm;
-                    try
-                    {
-                        pop.Close();
-                        done = true;
-                        break;
-                    }
-                    catch { }
-                }
-            }
-            if (!done)
+                loop.Close();
+            } 
+            else 
             {
-                SubLoop subLoop = new SubLoop();
-                subLoop.Show();
+                new SubLoop().Show();
             }
         }
-
         void Panic(object sender, EventArgs e)
         {
             foreach (Form fm in Application.OpenForms)

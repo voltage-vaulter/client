@@ -133,7 +133,7 @@
             button2.TabIndex = 13;
             button2.Text = "Change Server Settings";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += serverSettingsButton_Click;
             // 
             // button3
             // 
@@ -143,7 +143,7 @@
             button3.TabIndex = 17;
             button3.Text = "Add";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += AddToStartup;
             // 
             // panel1
             // 
@@ -163,7 +163,7 @@
             button4.TabIndex = 18;
             button4.Text = "Remove";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            button4.Click += RemoveFromStartup;
             // 
             // label4
             // 
