@@ -56,21 +56,21 @@ namespace ControlApp
             }
         }
 
-        void Exit(object sender, EventArgs e)
+        void Exit(object? sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             trayIcon.Visible = false;
 
             Application.Exit();
         }
-        void Open(object sender, EventArgs e)
+        void Open(object? sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             if (myform.IsDisposed)
                 myform = new MainWindow();
             myform.Show();
         }
-        void Subliminal(object sender, EventArgs e)
+        void Subliminal(object? sender, EventArgs e)
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             SubLoop? loop = (SubLoop?) Utils.GetForm(typeof(SubLoop));
@@ -83,7 +83,7 @@ namespace ControlApp
                 new SubLoop().Show();
             }
         }
-        void Panic(object sender, EventArgs e)
+        void Panic(object? sender, EventArgs e)
         {
             foreach (Form fm in Application.OpenForms)
             {
