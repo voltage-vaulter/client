@@ -5,8 +5,10 @@ using Microsoft.Win32;
 namespace ControlApp;
 
 public partial class ConfigSettingsForm : Form {
+	private MainWindow openingWindow;
 
-	public ConfigSettingsForm() {
+	public ConfigSettingsForm(MainWindow openingWindow) {
+		this.openingWindow = openingWindow;
 		InitializeComponent();
 	}
 
@@ -24,9 +26,9 @@ public partial class ConfigSettingsForm : Form {
 		apps.Add("UserName", textBox2.Text);
 		apps.Add("Password", Utils.Encrypt(textBox3.Text));
 		apps.Add("RunAll", checkBox2.Checked ? "true" : "false");
-		if (delaycmb.SelectedIndex == 0) {
+		if (delayCombo.SelectedIndex == 0) {
 			apps.Add("Delay", "30");
-		} else if (delaycmb.SelectedIndex == 1) {
+		} else if (delayCombo.SelectedIndex == 1) {
 			apps.Add("Delay", "60");
 		} else {
 			apps.Add("Delay", "120");
@@ -36,26 +38,26 @@ public partial class ConfigSettingsForm : Form {
 		MainWindow.RefreshCredentialCache();
 	}
 
-	private void button1_Click(object sender, EventArgs e) {
+	private void ConfigSettingsForm_OnClosing(object? sender, EventArgs e) {
+		openingWindow.UpdateTimerState();
+	}
+
+	private void confirmButton_Click(object? sender, EventArgs e) {
 		SaveSettings();
 		Close();
 	}
-
-	protected override void OnLoad(EventArgs e) {
-		base.OnLoad(e);
+	private void ConfigSettingsForm_Load(object? sender, EventArgs e) {
 		textBox1.Text = ConfigurationManager.AppSettings["LocalDrive"];
 		textBox2.Text = ConfigurationManager.AppSettings["UserName"];
 		textBox3.Text = Utils.Decrypt(ConfigurationManager.AppSettings["Password"] ?? String.Empty);
 		checkBox1.Checked = Convert.ToBoolean(ConfigurationManager.AppSettings["AutoRun"]);
 		checkBox2.Checked = Convert.ToBoolean(ConfigurationManager.AppSettings["RunAll"]);
-		delaycmb.SelectedIndex = ConfigurationManager.AppSettings["Delay"] switch {
+		delayCombo.SelectedIndex = ConfigurationManager.AppSettings["Delay"] switch {
 			"30" => 0,
 			"60" => 1,
-			"120" or _ => 2,
+			_ => 2,
 		};
 	}
-
-	private void ConfigSettingsForm_Load(object sender, EventArgs e) {}
 
 	private void serverSettingsButton_Click(object sender, EventArgs e) {
 		SaveSettings();

@@ -24,8 +24,7 @@ namespace ControlApp
     public class MyCustomApplicationContext : ApplicationContext
     {
         private NotifyIcon trayIcon;
-        private MainWindow myforminvis;
-        private MainWindow myform;
+        private MainWindow mainWindow;
         public MyCustomApplicationContext()
         {
             // Initialize Tray Icon
@@ -38,41 +37,26 @@ namespace ControlApp
             trayIcon.ContextMenuStrip.Items.Add("Subliminal", null, Subliminal);
             trayIcon.MouseClick += TrayIcon_MouseClick;
             trayIcon.Visible = true;
-            myforminvis = new MainWindow();
-            myforminvis.Opacity = 0;
-            myforminvis.ShowInTaskbar = false;
-            myforminvis.Show();
-            myform=new MainWindow();
+            mainWindow = new MainWindow();
         }
 
-        private void TrayIcon_MouseClick(object? sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                if (myform.IsDisposed) {
-                    myform = new MainWindow();
-                    myform.Show();       
-                }
-            }
+        private void TrayIcon_MouseClick(object? sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) return;
+            if (!mainWindow.Visible) mainWindow.Show();
         }
 
-        void Exit(object? sender, EventArgs e)
+        private void Exit(object? sender, EventArgs e)
         {
-            // Hide tray icon, otherwise it will remain shown until user mouses over it
-            trayIcon.Visible = false;
-
+            trayIcon.Visible = false; // Hide tray icon, otherwise it will remain shown until user mouses over it
+            mainWindow.Dispose();
             Application.Exit();
         }
-        void Open(object? sender, EventArgs e)
+        private void Open(object? sender, EventArgs e)
         {
-            // Hide tray icon, otherwise it will remain shown until user mouses over it
-            if (myform.IsDisposed)
-                myform = new MainWindow();
-            myform.Show();
+            if (!mainWindow.Visible) mainWindow.Show();
         }
-        void Subliminal(object? sender, EventArgs e)
+        private void Subliminal(object? sender, EventArgs e)
         {
-            // Hide tray icon, otherwise it will remain shown until user mouses over it
             SubLoop? loop = (SubLoop?) Utils.GetForm(typeof(SubLoop));
             if (loop != null) 
             {
@@ -83,7 +67,7 @@ namespace ControlApp
                 new SubLoop().Show();
             }
         }
-        void Panic(object? sender, EventArgs e)
+        private void Panic(object? sender, EventArgs e)
         {
             foreach (Form fm in Application.OpenForms)
             {
