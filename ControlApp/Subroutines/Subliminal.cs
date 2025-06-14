@@ -6,7 +6,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace ControlApp.Subroutines;
 
-public partial class Subliminal : Form
+public partial class Subliminal : Form // Maybe we can reformat this to extend Popup? They are more or less the same thing, with a few adjustments
 {
 	private static readonly Random randGen = Random.Shared;
 	private Timer timer;

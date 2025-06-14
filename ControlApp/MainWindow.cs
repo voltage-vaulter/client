@@ -3,6 +3,7 @@ using System.Media;
 using System.Runtime.InteropServices;
 using ControlApp.Commands;
 using ControlApp.Subroutines;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ControlApp;
 
@@ -11,6 +12,8 @@ public partial class MainWindow : Form {
     public static string? password = ConfigurationManager.AppSettings["Password"];
 	public static bool verified;
 
+	private static Timer? timer;
+
 	private static string[] userBlacklist;
 
 	private static string[]? lastSender;
@@ -18,12 +21,13 @@ public partial class MainWindow : Form {
 	private static Guid FolderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
 
 	public MainWindow() {
+		timer ??= new Timer();
 		InitializeComponent();
 		string? blacklistString = ConfigurationManager.AppSettings["BlackList"];
 		if (blacklistString != null) {
 			userBlacklist = Utils.SeparateString(blacklistString);
 		}
-		verified = false;
+		usernameInput.Text = username;
 		Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 		KeyValueConfigurationCollection settings = configuration.AppSettings.Settings;
 		string? downloadPath = ConfigurationManager.AppSettings["LocalDrive"];
@@ -36,6 +40,15 @@ public partial class MainWindow : Form {
 		settings.Add("LocalDrive", downloadPath);
 		configuration.Save(ConfigurationSaveMode.Full);
 		ConfigurationManager.RefreshSection(configuration.AppSettings.SectionInformation.Name);
+		UpdateTimerState();
+	}
+
+	internal void UpdateTimerState() {
+		if (Utils.CheckEnabled("RunAll")) {
+			timer.Start();
+		} else {
+			timer.Stop();
+		}
 	}
 
     public static void RefreshCredentialCache() {
@@ -43,11 +56,14 @@ public partial class MainWindow : Form {
         password = ConfigurationManager.AppSettings["Password"];
     }
 
-	protected override void OnLoad(EventArgs e) {
-		base.OnLoad(e);
-		usernameInput.Text = username;
-	}
-	private void timer1_Tick(object sender, EventArgs e) {
+    protected override void OnFormClosing(FormClosingEventArgs e) {
+	    base.OnFormClosing(e);
+	    if (e.CloseReason == CloseReason.WindowsShutDown) return;
+	    e.Cancel = true;
+	    Hide();
+    }
+
+    private void Timer_Tick(object sender, EventArgs e) {
 		Utils.LogInfo("Doing periodic check");
 		CheckNext();
 		if (Utils.CheckEnabled("RunAll")) {
@@ -97,8 +113,8 @@ public partial class MainWindow : Form {
 
 	private async Task RunNextCommand() {
 		Utils.LogInfo("Running next command");
-		timer1.Stop();
-		timer1.Start();
+		timer.Stop();
+		timer.Start();
 		string[]? result = ServerCommunicator.GetLatestItem();
 		if (result != null) {
 			lastSender = result;
@@ -106,7 +122,7 @@ public partial class MainWindow : Form {
 		}
 	}
 
-	private void RunCommands(string[] commandArray, string senderUsername) {
+	private static void RunCommands(string[] commandArray, string senderUsername) {
 		Command[] commands = HandleLines(commandArray);
 		Console.WriteLine($"Processed command array contains {commands.Length} elements");
 		if (commands.Length == 0) return;
@@ -117,7 +133,7 @@ public partial class MainWindow : Form {
 		}
 	}
 
-	private Command[] HandleLines(string[] lines) {
+	private static Command[] HandleLines(string[] lines) {
 		List<Command> returnList = new List<Command>();
 		Command.Type disallowedCommands = (Command.Type) Convert.ToUInt32(ConfigurationManager.AppSettings["DisAllowedCommands"]); // TODO: Add exception handling
 		string? configBlacklistOutput = ConfigurationManager.AppSettings["BlackList"];
@@ -151,11 +167,10 @@ public partial class MainWindow : Form {
 			if (containsBlacklisted) continue;
 			if (blacklistFound) {
 				foreach (string element in userBlacklist) {
-					if (parsedCommand.content.Contains(element)) {
-						new CustomMessage("Command contains blacklisted terms, skipping...", "", 3, false).ShowDialog();
-						containsBlacklisted = true;
-						break;
-					}
+					if (!parsedCommand.content.Contains(element)) continue;
+					new CustomMessage("Command contains blacklisted terms, skipping...", "", 3, false).ShowDialog();
+					containsBlacklisted = true;
+					break;
 				}
 				if (containsBlacklisted) continue;
 			}
@@ -164,7 +179,7 @@ public partial class MainWindow : Form {
 		return returnList.ToArray();
 	}
 
-	private void RunLastButtonClick(object sender, EventArgs e) {
+	private void runLastButton_Click(object sender, EventArgs e) {
 		if (lastSender == null) return;
 		RunCommands(lastSender[1].Split("|||"), lastSender[0]);
 	}
@@ -183,6 +198,6 @@ public partial class MainWindow : Form {
 	}
 
 	public static string? GetLastSenderId() {
-		return lastSender == null ? null : lastSender[0];
+		return lastSender?[0];
 	}
 }

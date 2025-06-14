@@ -36,8 +36,6 @@ partial class MainWindow {
 	private void InitializeComponent() {
 		components = new System.ComponentModel.Container();
 		
-		timer1 = new System.Windows.Forms.Timer(components);
-		
 		menuStrip1 = new MenuStrip();
 		settingToolStripMenuItem = new ToolStripMenuItem();
 		configToolStripMenuItem = new ToolStripMenuItem();
@@ -125,10 +123,10 @@ partial class MainWindow {
 		usernameTextLabel.TabIndex = 16;
 		usernameTextLabel.Text = "User Name";
 		// 
-		// timer1
+		// timer
 		// 
-		timer1.Interval = 1500;
-		timer1.Tick += timer1_Tick;
+		timer.Interval = 1500;
+		timer.Tick += Timer_Tick;
 		// 
 		// tabControl
 		// 
@@ -179,7 +177,7 @@ partial class MainWindow {
 		runLastButton.TabIndex = 12;
 		runLastButton.Text = "Run Last";
 		runLastButton.UseVisualStyleBackColor = true;
-		runLastButton.Click += RunLastButtonClick;
+		runLastButton.Click += runLastButton_Click;
 		// 
 		// clearOutstandingButton
 		// 
@@ -337,7 +335,6 @@ partial class MainWindow {
 	private ToolStripMenuItem optionsToolStripMenuItem;
 	private TextBox usernameInput;
 	private Label usernameTextLabel;
-	private System.Windows.Forms.Timer timer1;
 	private TabControl tabControl;
 	private TabPage mainTab;
 	private CommandBuilderTab sendCommandTab;
@@ -361,12 +358,12 @@ partial class MainWindow {
 	private void Form1_Load(object sender, EventArgs e) {
 		CheckNext();
 		int delay = (ConfigurationManager.AppSettings["Delay"] != null) ? Convert.ToInt32(ConfigurationManager.AppSettings["Delay"]) : 60;
-		timer1.Enabled = true;
-		timer1.Interval = delay * 1000;
+		timer.Enabled = true;
+		timer.Interval = delay * 1000;
 	}
 
 	private void configToolStripMenuItem_Click(object sender, EventArgs e) {
-		new ConfigSettingsForm().ShowDialog();
+		new ConfigSettingsForm(this).ShowDialog();
 		usernameInput.Text = username;
 	}
 
@@ -403,8 +400,8 @@ partial class MainWindow {
 	}
 
 	private void checkNextButton_Click(object sender, EventArgs e) {
-		timer1.Stop();
-		timer1.Start();
+		timer.Stop();
+		timer.Start();
 		CheckNext();
 	}
 }

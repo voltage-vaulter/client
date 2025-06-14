@@ -754,22 +754,21 @@ partial class Options
 		if (parallelRadioButton.Checked) {
 			fullscreenCheckbox.Checked = false;
 		}
+		fullscreenCheckbox.Enabled = !parallelRadioButton.Checked;
 	}
 
 	private void disableInputCheckbox_Changed(object sender, EventArgs e) {
 		if (disableInputCheckbox.Checked) {
 			disableMouseCheckbox.Checked = true;
-			disableMouseCheckbox.Enabled = false;
-		} else {
-			disableMouseCheckbox.Enabled = true;
 		}
+		disableMouseCheckbox.Enabled = !disableInputCheckbox.Checked;
 	}
 
 	void shortPopupRadioButton_CheckedChanged(object sender, EventArgs e) {
-		longPopupRadioButton.Enabled = !shortPopupRadioButton.Enabled;
+		longPopupRadioButton.Checked = !shortPopupRadioButton.Checked;
 	}
 
 	void longPopupRadioButton_CheckedChanged(object sender, EventArgs e) {
-		shortPopupRadioButton.Enabled = !longPopupRadioButton.Enabled;
+		shortPopupRadioButton.Checked = !longPopupRadioButton.Checked;
 	}
 }
