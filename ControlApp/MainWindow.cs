@@ -46,9 +46,9 @@ public partial class MainWindow : Form {
 
     public void UpdateTimerState() {
 	    if (Utils.CheckEnabled("RunAll")) {
-		    timer1.Start();
+		    timer.Start();
 	    } else {
-		    timer1.Stop();
+		    timer.Stop();
 	    }
     }
 
@@ -113,8 +113,8 @@ public partial class MainWindow : Form {
 
 	private async Task RunNextCommand() {
 		Utils.LogInfo("Running next command");
-		timer1.Stop();
-		timer1.Start();
+		timer.Stop();
+		timer.Start();
 		string[]? result = ServerCommunicator.GetLatestItem();
 		if (result != null) {
 			lastSender = result;
