@@ -366,7 +366,7 @@ partial class MainWindow {
 	}
 
 	private void configToolStripMenuItem_Click(object sender, EventArgs e) {
-		new ConfigSettingsForm().ShowDialog();
+		new ConfigSettingsForm(this).ShowDialog();
 		usernameInput.Text = username;
 	}
 

@@ -3,7 +3,7 @@ using ControlApp.Commands;
 
 namespace ControlApp;
 
-public partial class Options : Form {
+public partial class Options : Form { // TODO: Maybe merge "Config" with this as a new tab?
 	public Options() {
 		InitializeComponent();
 	}
@@ -25,7 +25,7 @@ public partial class Options : Form {
 		movingRadioButton.Checked = poptypestr[2] == 'n';
 		stillRadioButton.Checked = !movingRadioButton.Checked; // not checking for 'm' to make non-moving the default in case of exception
 		fullscreenCheckbox.Checked = poptypestr[3] == 'f';
-		showblocked.Checked = Utils.CheckEnabled("Showblocked");
+		showBlockedCheckbox.Checked = Utils.CheckEnabled("Showblocked");
 		longPopupRadioButton.Checked = ConfigurationManager.AppSettings["PopSet"] == "Long";
 		shortPopupRadioButton.Checked = !longPopupRadioButton.Checked;
 		reminderCheckbox.Checked = Utils.CheckEnabled("OutstandRemind");
@@ -77,7 +77,7 @@ public partial class Options : Form {
 		appSettings.Remove("DisallowedCommands");
 		appSettings.Remove("DisableInput");
 		Command.Type disallowedCommands = 0;
-		appSettings.Add("Showblocked", showblocked.Checked.ToString());
+		appSettings.Add("Showblocked", showBlockedCheckbox.Checked.ToString());
 		string popupTypeString = seethroughRadioButton.Checked ? "s" : "n";
 		if (clickthroughRadioButton.Checked) {
 			popupTypeString += "t";

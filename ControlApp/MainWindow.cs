@@ -36,6 +36,7 @@ public partial class MainWindow : Form {
 		settings.Add("LocalDrive", downloadPath);
 		configuration.Save(ConfigurationSaveMode.Full);
 		ConfigurationManager.RefreshSection(configuration.AppSettings.SectionInformation.Name);
+		UpdateTimerState();
 	}
 
     public static void RefreshCredentialCache() {
@@ -43,10 +44,25 @@ public partial class MainWindow : Form {
         password = ConfigurationManager.AppSettings["Password"];
     }
 
-	protected override void OnLoad(EventArgs e) {
+    public void UpdateTimerState() {
+	    if (Utils.CheckEnabled("RunAll")) {
+		    timer1.Start();
+	    } else {
+		    timer1.Stop();
+	    }
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e) {
+	    if (e.CloseReason != CloseReason.UserClosing && e.CloseReason != CloseReason.None) return;
+	    e.Cancel = true;
+	    Hide();
+    }
+
+    protected override void OnLoad(EventArgs e) {
 		base.OnLoad(e);
 		usernameInput.Text = username;
 	}
+    
 	private void timer1_Tick(object sender, EventArgs e) {
 		Utils.LogInfo("Doing periodic check");
 		CheckNext();

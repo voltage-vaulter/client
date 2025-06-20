@@ -7,8 +7,8 @@ namespace ControlApp;
 public partial class CommandBuilderTab : TabPage {
     private readonly string COMMAND_SEPARATOR = "|||";
     
-    private readonly List<object> buildersList = new object[] {
-        new { DisplayName = "Select Command" },
+    private readonly List<CommandBuilder> buildersList = new CommandBuilder[] {
+        new DummyCommandBuilder("Select Command"),
         new AudioCommandBuilder(),
         new DownloadCommandBuilder(),
         new InputDisableCommandBuilder(),

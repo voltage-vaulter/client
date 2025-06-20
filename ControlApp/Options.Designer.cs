@@ -29,7 +29,7 @@ partial class Options
 	private void InitializeComponent() {
 		saveAndExitButton = new System.Windows.Forms.Button();
 		tabPage1 = new System.Windows.Forms.TabPage();
-		panel10 = new System.Windows.Forms.Panel();
+		popupTypePanel = new System.Windows.Forms.Panel();
 		fullscreenCheckbox = new System.Windows.Forms.CheckBox();
 		panel6 = new System.Windows.Forms.Panel();
 		movingRadioButton = new System.Windows.Forms.RadioButton();
@@ -42,20 +42,20 @@ partial class Options
 		clickthroughRadioButton = new System.Windows.Forms.RadioButton();
 		normalRadioButton = new System.Windows.Forms.RadioButton();
 		label11 = new System.Windows.Forms.Label();
-		panel4 = new System.Windows.Forms.Panel();
+		miscOptionsPanel = new System.Windows.Forms.Panel();
 		darkModeCheckbox = new System.Windows.Forms.CheckBox();
 		webcamCountCheckbox = new System.Windows.Forms.CheckBox();
 		label5 = new System.Windows.Forms.Label();
-		showblocked = new System.Windows.Forms.CheckBox();
-		panel3 = new System.Windows.Forms.Panel();
+		showBlockedCheckbox = new System.Windows.Forms.CheckBox();
+		popupModePanel = new System.Windows.Forms.Panel();
 		parallelRadioButton = new System.Windows.Forms.RadioButton();
 		serialRadioButton = new System.Windows.Forms.RadioButton();
 		label4 = new System.Windows.Forms.Label();
-		panel2 = new System.Windows.Forms.Panel();
+		wallpaperPanel = new System.Windows.Forms.Panel();
 		scaleToFitRadioButton = new System.Windows.Forms.RadioButton();
 		scaleStretchRadioButton = new System.Windows.Forms.RadioButton();
 		label3 = new System.Windows.Forms.Label();
-		panel1 = new System.Windows.Forms.Panel();
+		disallowPanel = new System.Windows.Forms.Panel();
 		disableMouseCheckbox = new System.Windows.Forms.CheckBox();
 		disableInputCheckbox = new System.Windows.Forms.CheckBox();
 		ttsCheckbox = new System.Windows.Forms.CheckBox();
@@ -75,21 +75,21 @@ partial class Options
 		runnableCheckbox = new System.Windows.Forms.CheckBox();
 		wallpaperCheckbox = new System.Windows.Forms.CheckBox();
 		downloadCheckbox = new System.Windows.Forms.CheckBox();
-		popupPanel = new System.Windows.Forms.Panel();
+		popupLengthPanel = new System.Windows.Forms.Panel();
 		longPopupRadioButton = new System.Windows.Forms.RadioButton();
 		shortPopupRadioButton = new System.Windows.Forms.RadioButton();
 		label1 = new System.Windows.Forms.Label();
 		tabControl1 = new System.Windows.Forms.TabControl();
 		tabPage1.SuspendLayout();
-		panel10.SuspendLayout();
+		popupTypePanel.SuspendLayout();
 		panel6.SuspendLayout();
 		panel5.SuspendLayout();
 		panel11.SuspendLayout();
-		panel4.SuspendLayout();
-		panel3.SuspendLayout();
-		panel2.SuspendLayout();
-		panel1.SuspendLayout();
-		popupPanel.SuspendLayout();
+		miscOptionsPanel.SuspendLayout();
+		popupModePanel.SuspendLayout();
+		wallpaperPanel.SuspendLayout();
+		disallowPanel.SuspendLayout();
+		popupLengthPanel.SuspendLayout();
 		tabControl1.SuspendLayout();
 		SuspendLayout();
 		// 
@@ -105,12 +105,12 @@ partial class Options
 		// 
 		// tabPage1
 		// 
-		tabPage1.Controls.Add(panel10);
-		tabPage1.Controls.Add(panel4);
-		tabPage1.Controls.Add(panel3);
-		tabPage1.Controls.Add(panel2);
-		tabPage1.Controls.Add(panel1);
-		tabPage1.Controls.Add(popupPanel);
+		tabPage1.Controls.Add(popupTypePanel);
+		tabPage1.Controls.Add(miscOptionsPanel);
+		tabPage1.Controls.Add(popupModePanel);
+		tabPage1.Controls.Add(wallpaperPanel);
+		tabPage1.Controls.Add(disallowPanel);
+		tabPage1.Controls.Add(popupLengthPanel);
 		tabPage1.Location = new System.Drawing.Point(4, 24);
 		tabPage1.Name = "tabPage1";
 		tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -119,17 +119,17 @@ partial class Options
 		tabPage1.Text = "General";
 		tabPage1.UseVisualStyleBackColor = true;
 		// 
-		// panel10
+		// popupTypePanel
 		// 
-		panel10.Controls.Add(fullscreenCheckbox);
-		panel10.Controls.Add(panel6);
-		panel10.Controls.Add(panel5);
-		panel10.Controls.Add(panel11);
-		panel10.Controls.Add(label11);
-		panel10.Location = new System.Drawing.Point(346, 99);
-		panel10.Name = "panel10";
-		panel10.Size = new System.Drawing.Size(334, 200);
-		panel10.TabIndex = 30;
+		popupTypePanel.Controls.Add(fullscreenCheckbox);
+		popupTypePanel.Controls.Add(panel6);
+		popupTypePanel.Controls.Add(panel5);
+		popupTypePanel.Controls.Add(panel11);
+		popupTypePanel.Controls.Add(label11);
+		popupTypePanel.Location = new System.Drawing.Point(346, 99);
+		popupTypePanel.Name = "popupTypePanel";
+		popupTypePanel.Size = new System.Drawing.Size(334, 200);
+		popupTypePanel.TabIndex = 30;
 		// 
 		// fullscreenCheckbox
 		// 
@@ -256,16 +256,16 @@ partial class Options
 		label11.TabIndex = 0;
 		label11.Text = "Panel Type";
 		// 
-		// panel4
+		// miscOptionsPanel
 		// 
-		panel4.Controls.Add(darkModeCheckbox);
-		panel4.Controls.Add(webcamCountCheckbox);
-		panel4.Controls.Add(label5);
-		panel4.Controls.Add(showblocked);
-		panel4.Location = new System.Drawing.Point(346, 305);
-		panel4.Name = "panel4";
-		panel4.Size = new System.Drawing.Size(334, 114);
-		panel4.TabIndex = 29;
+		miscOptionsPanel.Controls.Add(darkModeCheckbox);
+		miscOptionsPanel.Controls.Add(webcamCountCheckbox);
+		miscOptionsPanel.Controls.Add(label5);
+		miscOptionsPanel.Controls.Add(showBlockedCheckbox);
+		miscOptionsPanel.Location = new System.Drawing.Point(346, 305);
+		miscOptionsPanel.Name = "miscOptionsPanel";
+		miscOptionsPanel.Size = new System.Drawing.Size(334, 114);
+		miscOptionsPanel.TabIndex = 29;
 		// 
 		// darkModeCheckbox
 		// 
@@ -296,25 +296,25 @@ partial class Options
 		label5.TabIndex = 21;
 		label5.Text = "Options";
 		// 
-		// showblocked
+		// showBlockedCheckbox
 		// 
-		showblocked.AutoSize = true;
-		showblocked.Location = new System.Drawing.Point(21, 43);
-		showblocked.Name = "showblocked";
-		showblocked.Size = new System.Drawing.Size(163, 19);
-		showblocked.TabIndex = 20;
-		showblocked.Text = "Show blocked commands";
-		showblocked.UseVisualStyleBackColor = true;
+		showBlockedCheckbox.AutoSize = true;
+		showBlockedCheckbox.Location = new System.Drawing.Point(21, 43);
+		showBlockedCheckbox.Name = "showBlockedCheckbox";
+		showBlockedCheckbox.Size = new System.Drawing.Size(163, 19);
+		showBlockedCheckbox.TabIndex = 20;
+		showBlockedCheckbox.Text = "Show blocked commands";
+		showBlockedCheckbox.UseVisualStyleBackColor = true;
 		// 
-		// panel3
+		// popupModePanel
 		// 
-		panel3.Controls.Add(parallelRadioButton);
-		panel3.Controls.Add(serialRadioButton);
-		panel3.Controls.Add(label4);
-		panel3.Location = new System.Drawing.Point(346, 6);
-		panel3.Name = "panel3";
-		panel3.Size = new System.Drawing.Size(334, 87);
-		panel3.TabIndex = 27;
+		popupModePanel.Controls.Add(parallelRadioButton);
+		popupModePanel.Controls.Add(serialRadioButton);
+		popupModePanel.Controls.Add(label4);
+		popupModePanel.Location = new System.Drawing.Point(346, 6);
+		popupModePanel.Name = "popupModePanel";
+		popupModePanel.Size = new System.Drawing.Size(334, 87);
+		popupModePanel.TabIndex = 27;
 		// 
 		// parallelRadioButton
 		// 
@@ -348,15 +348,15 @@ partial class Options
 		label4.TabIndex = 0;
 		label4.Text = "Popups";
 		// 
-		// panel2
+		// wallpaperPanel
 		// 
-		panel2.Controls.Add(scaleToFitRadioButton);
-		panel2.Controls.Add(scaleStretchRadioButton);
-		panel2.Controls.Add(label3);
-		panel2.Location = new System.Drawing.Point(6, 371);
-		panel2.Name = "panel2";
-		panel2.Size = new System.Drawing.Size(334, 48);
-		panel2.TabIndex = 28;
+		wallpaperPanel.Controls.Add(scaleToFitRadioButton);
+		wallpaperPanel.Controls.Add(scaleStretchRadioButton);
+		wallpaperPanel.Controls.Add(label3);
+		wallpaperPanel.Location = new System.Drawing.Point(6, 371);
+		wallpaperPanel.Name = "wallpaperPanel";
+		wallpaperPanel.Size = new System.Drawing.Size(334, 48);
+		wallpaperPanel.TabIndex = 28;
 		// 
 		// scaleToFitRadioButton
 		// 
@@ -389,31 +389,31 @@ partial class Options
 		label3.TabIndex = 0;
 		label3.Text = "Wallpaper";
 		// 
-		// panel1
+		// disallowPanel
 		// 
-		panel1.Controls.Add(disableMouseCheckbox);
-		panel1.Controls.Add(disableInputCheckbox);
-		panel1.Controls.Add(ttsCheckbox);
-		panel1.Controls.Add(webcamCheckbox);
-		panel1.Controls.Add(reminderCheckbox);
-		panel1.Controls.Add(sendDeleteCheckbox);
-		panel1.Controls.Add(watchForMeCheckbox);
-		panel1.Controls.Add(twitterCheckbox);
-		panel1.Controls.Add(screenshotCheckbox);
-		panel1.Controls.Add(writeForMeCheckbox);
-		panel1.Controls.Add(audioCheckbox);
-		panel1.Controls.Add(subliminalCheckbox);
-		panel1.Controls.Add(messageCheckbox);
-		panel1.Controls.Add(popupCheckbox);
-		panel1.Controls.Add(label2);
-		panel1.Controls.Add(websiteCheckbox);
-		panel1.Controls.Add(runnableCheckbox);
-		panel1.Controls.Add(wallpaperCheckbox);
-		panel1.Controls.Add(downloadCheckbox);
-		panel1.Location = new System.Drawing.Point(6, 99);
-		panel1.Name = "panel1";
-		panel1.Size = new System.Drawing.Size(334, 266);
-		panel1.TabIndex = 26;
+		disallowPanel.Controls.Add(disableMouseCheckbox);
+		disallowPanel.Controls.Add(disableInputCheckbox);
+		disallowPanel.Controls.Add(ttsCheckbox);
+		disallowPanel.Controls.Add(webcamCheckbox);
+		disallowPanel.Controls.Add(reminderCheckbox);
+		disallowPanel.Controls.Add(sendDeleteCheckbox);
+		disallowPanel.Controls.Add(watchForMeCheckbox);
+		disallowPanel.Controls.Add(twitterCheckbox);
+		disallowPanel.Controls.Add(screenshotCheckbox);
+		disallowPanel.Controls.Add(writeForMeCheckbox);
+		disallowPanel.Controls.Add(audioCheckbox);
+		disallowPanel.Controls.Add(subliminalCheckbox);
+		disallowPanel.Controls.Add(messageCheckbox);
+		disallowPanel.Controls.Add(popupCheckbox);
+		disallowPanel.Controls.Add(label2);
+		disallowPanel.Controls.Add(websiteCheckbox);
+		disallowPanel.Controls.Add(runnableCheckbox);
+		disallowPanel.Controls.Add(wallpaperCheckbox);
+		disallowPanel.Controls.Add(downloadCheckbox);
+		disallowPanel.Location = new System.Drawing.Point(6, 99);
+		disallowPanel.Name = "disallowPanel";
+		disallowPanel.Size = new System.Drawing.Size(334, 266);
+		disallowPanel.TabIndex = 26;
 		// 
 		// disableMouseCheckbox
 		// 
@@ -605,15 +605,15 @@ partial class Options
 		downloadCheckbox.Text = "Download";
 		downloadCheckbox.UseVisualStyleBackColor = true;
 		// 
-		// popupPanel
+		// popupLengthPanel
 		// 
-		popupPanel.Controls.Add(longPopupRadioButton);
-		popupPanel.Controls.Add(shortPopupRadioButton);
-		popupPanel.Controls.Add(label1);
-		popupPanel.Location = new System.Drawing.Point(6, 6);
-		popupPanel.Name = "popupPanel";
-		popupPanel.Size = new System.Drawing.Size(334, 87);
-		popupPanel.TabIndex = 25;
+		popupLengthPanel.Controls.Add(longPopupRadioButton);
+		popupLengthPanel.Controls.Add(shortPopupRadioButton);
+		popupLengthPanel.Controls.Add(label1);
+		popupLengthPanel.Location = new System.Drawing.Point(6, 6);
+		popupLengthPanel.Name = "popupLengthPanel";
+		popupLengthPanel.Size = new System.Drawing.Size(334, 87);
+		popupLengthPanel.TabIndex = 25;
 		// 
 		// longPopupRadioButton
 		// 
@@ -664,27 +664,29 @@ partial class Options
 		ClientSize = new System.Drawing.Size(709, 509);
 		Controls.Add(tabControl1);
 		Controls.Add(saveAndExitButton);
+		MaximumSize = new System.Drawing.Size(725, 548);
+		MinimumSize = new System.Drawing.Size(725, 548);
 		Text = "Options";
 		Load += Options_Load;
 		tabPage1.ResumeLayout(false);
-		panel10.ResumeLayout(false);
-		panel10.PerformLayout();
+		popupTypePanel.ResumeLayout(false);
+		popupTypePanel.PerformLayout();
 		panel6.ResumeLayout(false);
 		panel6.PerformLayout();
 		panel5.ResumeLayout(false);
 		panel5.PerformLayout();
 		panel11.ResumeLayout(false);
 		panel11.PerformLayout();
-		panel4.ResumeLayout(false);
-		panel4.PerformLayout();
-		panel3.ResumeLayout(false);
-		panel3.PerformLayout();
-		panel2.ResumeLayout(false);
-		panel2.PerformLayout();
-		panel1.ResumeLayout(false);
-		panel1.PerformLayout();
-		popupPanel.ResumeLayout(false);
-		popupPanel.PerformLayout();
+		miscOptionsPanel.ResumeLayout(false);
+		miscOptionsPanel.PerformLayout();
+		popupModePanel.ResumeLayout(false);
+		popupModePanel.PerformLayout();
+		wallpaperPanel.ResumeLayout(false);
+		wallpaperPanel.PerformLayout();
+		disallowPanel.ResumeLayout(false);
+		disallowPanel.PerformLayout();
+		popupLengthPanel.ResumeLayout(false);
+		popupLengthPanel.PerformLayout();
 		tabControl1.ResumeLayout(false);
 		ResumeLayout(false);
 	}
@@ -692,7 +694,7 @@ partial class Options
 	#endregion
 	private Button saveAndExitButton;
 	private TabPage tabPage1;
-	private System.Windows.Forms.Panel panel10;
+	private System.Windows.Forms.Panel popupTypePanel;
 	private System.Windows.Forms.Panel panel6;
 	private RadioButton movingRadioButton;
 	private RadioButton stillRadioButton;
@@ -704,19 +706,19 @@ partial class Options
 	private RadioButton clickthroughRadioButton;
 	private RadioButton normalRadioButton;
 	private Label label11;
-	private Panel panel4;
+	private Panel miscOptionsPanel;
 	private CheckBox webcamCountCheckbox;
 	private Label label5;
-	private CheckBox showblocked;
-	private System.Windows.Forms.Panel panel3;
+	private CheckBox showBlockedCheckbox;
+	private System.Windows.Forms.Panel popupModePanel;
 	private RadioButton parallelRadioButton;
 	private RadioButton serialRadioButton;
 	private Label label4;
-	private Panel panel2;
+	private Panel wallpaperPanel;
 	private System.Windows.Forms.RadioButton scaleToFitRadioButton;
 	private System.Windows.Forms.RadioButton scaleStretchRadioButton;
 	private System.Windows.Forms.Label label3;
-	private System.Windows.Forms.Panel panel1;
+	private System.Windows.Forms.Panel disallowPanel;
 	private CheckBox disableMouseCheckbox;
 	private CheckBox ttsCheckbox;
 	private CheckBox webcamCheckbox;
@@ -735,7 +737,7 @@ partial class Options
 	private CheckBox runnableCheckbox;
 	private CheckBox wallpaperCheckbox;
 	private CheckBox downloadCheckbox;
-	private System.Windows.Forms.Panel popupPanel;
+	private System.Windows.Forms.Panel popupLengthPanel;
 	private System.Windows.Forms.RadioButton longPopupRadioButton;
 	private System.Windows.Forms.RadioButton shortPopupRadioButton;
 	private System.Windows.Forms.Label label1;
@@ -748,28 +750,28 @@ partial class Options
 		if (fullscreenCheckbox.Checked) {
 			serialRadioButton.Checked = true;
 		}
+		parallelRadioButton.Enabled = !fullscreenCheckbox.Checked;
 	}
 
 	private void parallelRadioButton_Changed(object sender, EventArgs e) {
 		if (parallelRadioButton.Checked) {
 			fullscreenCheckbox.Checked = false;
 		}
+		fullscreenCheckbox.Enabled = !parallelRadioButton.Checked;
 	}
 
 	private void disableInputCheckbox_Changed(object sender, EventArgs e) {
 		if (disableInputCheckbox.Checked) {
 			disableMouseCheckbox.Checked = true;
-			disableMouseCheckbox.Enabled = false;
-		} else {
-			disableMouseCheckbox.Enabled = true;
 		}
+		disableMouseCheckbox.Enabled = !disableInputCheckbox.Checked;
 	}
 
 	void shortPopupRadioButton_CheckedChanged(object sender, EventArgs e) {
-		longPopupRadioButton.Enabled = !shortPopupRadioButton.Enabled;
+		longPopupRadioButton.Checked = !shortPopupRadioButton.Checked;
 	}
 
 	void longPopupRadioButton_CheckedChanged(object sender, EventArgs e) {
-		shortPopupRadioButton.Enabled = !longPopupRadioButton.Enabled;
+		shortPopupRadioButton.Checked = !longPopupRadioButton.Checked;
 	}
 }
